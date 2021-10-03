@@ -1,7 +1,7 @@
 import React from 'react';
 import { Segment, Grid } from 'semantic-ui-react';
 import DisplayBalance from './DisplayBalance';
-function DisplayBalances() {
+function DisplayBalances({ totalIncomes, totalExpenses }) {
 	return (
 		<Segment textAlign='center'>
 			<Grid columns={2} divided>
@@ -9,7 +9,7 @@ function DisplayBalances() {
 					<Grid.Column>
 						<DisplayBalance
 							title='Income'
-							value='1,045.50'
+							value={totalIncomes}
 							size='tiny'
 							color='green'
 							align='left'
@@ -18,7 +18,7 @@ function DisplayBalances() {
 					<Grid.Column>
 						<DisplayBalance
 							title='Expenses'
-							value='625.30'
+							value={totalExpenses}
 							size='tiny'
 							color='red'
 							align='left'
