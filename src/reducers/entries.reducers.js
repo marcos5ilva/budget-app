@@ -5,7 +5,7 @@ const reducer = (state = initialEntires, action) => {
 			newEntries = state.concat({ ...action.payload });
 			return newEntries;
 		case 'REMOVE_ENTRY':
-			newEntries = state.filter(entry => entry.id != action.payload.id);
+			newEntries = state.filter(entry => entry.id !== action.payload.id);
 			return newEntries;
 		default:
 			return state;
@@ -18,13 +18,13 @@ export default reducer;
 let initialEntires = [
 	{
 		id: 1,
-		description: 'Work income',
+		description: 'Work income redux',
 		value: 3000.0,
 		isExpense: false
 	},
 	{
 		id: 2,
-		description: 'Water bill',
+		description: 'Water bill redux',
 		value: 100.0,
 		isExpense: true
 	},

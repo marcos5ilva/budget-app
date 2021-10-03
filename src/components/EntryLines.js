@@ -1,22 +1,9 @@
 import React from 'react';
 import EntryLine from './EntryLine';
 
-function EntryLines({
-	values = [],
-	deleteEntry,
-	editEntry,
-	isOpen,
-	setIsOpen
-}) {
+function EntryLines({ values = [], editEntry }) {
 	return values.map(entry => (
-		<EntryLine
-			key={entry.id}
-			entry={entry}
-			deleteEntry={deleteEntry}
-			editEntry={editEntry}
-			isOpen={isOpen}
-			setIsOpen={setIsOpen}
-		/>
+		<EntryLine key={entry.id} entry={entry} editEntry={editEntry} />
 	));
 }
 

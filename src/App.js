@@ -7,34 +7,9 @@ import DisplayBalances from './components/DisplayBalances';
 import EntryLines from './components/EntryLines';
 import { useEffect, useState } from 'react';
 import ModalEdit from './components/ModalEdit';
+import { useSelector } from 'react-redux';
+
 function App() {
-	let initialEntires = [
-		{
-			id: 1,
-			description: 'Work income',
-			value: 3000.0,
-			isExpense: false
-		},
-		{
-			id: 2,
-			description: 'Water bill',
-			value: 100.0,
-			isExpense: true
-		},
-		{
-			id: 3,
-			description: 'Rent',
-			value: 1000.0,
-			isExpense: true
-		},
-		{
-			id: 4,
-			description: 'Power bill',
-			value: 60.0,
-			isExpense: true
-		}
-	];
-	const [entries, setEntries] = useState(initialEntires);
 	const [description, setDescription] = useState('');
 	const [value, setValue] = useState('');
 	const [isExpense, setIsExpense] = useState(true);
@@ -43,6 +18,7 @@ function App() {
 	const [totalIncomes, setTotalIncomes] = useState(0);
 	const [totalExpenses, setTotalExpenses] = useState(0);
 	const [balance, setBalance] = useState(0);
+	const entries = useSelector(state => state.entries);
 
 	useEffect(() => {
 		if (!isOpen && entryId) {
@@ -51,7 +27,7 @@ function App() {
 			newEntries[index].description = description;
 			newEntries[index].value = value;
 			newEntries[index].isExpense = isExpense;
-			setEntries(newEntries);
+			//setEntries(newEntries);
 			resetEntries();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,11 +55,6 @@ function App() {
 		setIsExpense(true);
 	}
 
-	function deleteEntry(id) {
-		const result = entries.filter(entry => entry.id !== id);
-		setEntries(result);
-	}
-
 	function addEntry() {
 		const result = entries.concat({
 			id: entries.length + 1,
@@ -91,7 +62,7 @@ function App() {
 			value,
 			isExpense
 		});
-		setEntries(result);
+		//setEntries(result);
 		resetEntries();
 	}
 
@@ -122,23 +93,9 @@ function App() {
 				totalExpenses={totalExpenses}
 			/>
 			<MainHeader title='History' type='h3' />
-			<EntryLines
-				values={entries}
-				deleteEntry={deleteEntry}
-				editEntry={editEntry}
-				isOpen={isOpen}
-				setIsOpen={setIsOpen}
-			/>
+			<EntryLines values={entries} editEntry={editEntry} />
 			<MainHeader trype='Add new transactions' type='h3' />
-			<NewEntryForm
-				addEntry={addEntry}
-				description={description}
-				value={value}
-				isExpense={isExpense}
-				setDescription={setDescription}
-				setValue={setValue}
-				setIsExpense={setIsExpense}
-			/>
+			<NewEntryForm />
 			<ModalEdit
 				isOpen={isOpen}
 				setIsOpen={setIsOpen}
